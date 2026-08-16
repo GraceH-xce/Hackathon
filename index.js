@@ -198,10 +198,10 @@ function drawReflection(r) {
 }
 
 function careCard() {
-  return '<div class="care"><strong>Before anything else</strong>' +
-    'Some of what you wrote sounds heavy to be holding alone. JourNote can sort thoughts, ' +
-    'but it cannot sit with you. Please tell someone you trust, or reach a crisis line.' +
-    ' Befrienders KL answers 24 hours on +603-76272929.</div>';
+  return '<div class="care"><strong>Before anything else:</strong><br>' +
+    'Some of what you wrote sounds heavy to be holding alone. This app can sort thoughts, ' +
+    'but it cannot sit with you. Please tell someone you trust, or connect with support:<br>' +
+    '<strong>Befrienders Malaysia (24/7):</strong> <a href="tel:+60376272929" class="care-link">+603-76272929</a> or visit <a href="https://www.befrienders.org.my/" target="_blank" rel="noopener noreferrer" class="care-link">befrienders.org.my</a><br></a></div>';
 }
 
 async function redoAff() {
