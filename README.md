@@ -29,7 +29,7 @@ With the collaboration of AI, it doesn't give advice, nor does it diagnose. It j
 |---|---|
 | Frontend | HTML, CSS, JavaScript |
 | AI | Google Gemini 3.5 Flash (free tier), Claude Sonnet|
-| Local server | My browser's local server |
+| Local server | Browser local server |
 | Storage | Browser localStorage |
 
 No frameworks. No build step. No database. No accounts.
@@ -48,16 +48,71 @@ No frameworks. No build step. No database. No accounts.
 
 ---
 
-## How AI is used (A detailed report PDF is submitted on DevPost)
+## How AI is used
 
-The prompt explicitly instructs the model to:
--Sort and not prescribe
--It names what was written, not what it means
--Use the user's own words wherever possible, so nothing feels fabricated
--Flags crisis language if entry contains signs of self-harm or suicidal ideation , `concern: true` is returned and the care card is shown before going to sorting again
+The AI is called in exactly two situations:
+
+**1. Sorting the journal entry**
+When the user clicks "I'm done", their full entry is sent to Gemini with a system prompt that instructs it to return a structured JSON object with five fields: `today`, `letGo`, `revisit`, `affirmation`, and `concern`.
+
+**2. Regenerating the affirmation**
+If the user clicks "This doesn't feel right", the original entry and the missed affirmation are sent back and Gemini tries again from a different angle.
+
+That is the entire scope of AI use in this project.
+
+## The prompt
+This is the full system prompt used for sorting:
+
+```
+You are the sorting engine inside a journaling app called JourNote.
+Someone has just written a vent. Do NOT give advice, do NOT diagnose,
+do NOT open with sympathy. Your job is to SORT what they wrote, using
+their own words where you can, and then write one affirmation.
+
+Return ONLY a valid JSON object matching this schema:
+{"today":["..."],"letGo":["..."],"revisit":["..."],"affirmation":"...","concern":false}
+
+Rules:
+- "today": up to 3. Things inside their control that could plausibly
+  be done today. Concrete. Start with a verb.
+- "letGo": 2-3. Things genuinely outside their control: other people's
+  opinions, the past, decisions already made by someone else, outcomes
+  not yet decided. Name the thing itself, do not phrase it as an
+  instruction.
+- "revisit": 1-3. Real, important things that do not need solving
+  today: big decisions, unresolved feelings, conversations that need
+  more time.
+- Every item: one line, max 12 words, second person, plain language,
+  no therapy jargon.
+- Never invent details they did not write. If they wrote very little,
+  return fewer items rather than padding.
+- "affirmation": 1-2 sentences, max 25 words, written as if THEY
+  wrote it to themselves about this specific entry. No "you've got
+  this", no "everything happens for a reason", no exclamation marks,
+  no emoji.
+- "concern": true only if they describe wanting to hurt themselves or
+  end their life. Otherwise false.
+```
+
+Simply, the prompt explicitly instructs the model to:
+### sort and not prescribe
+### name what was written, not what it means
+### use the user's own words wherever possible, so nothing feels fabricated
+### flags crisis language if entry contains signs of self-harm or suicidal ideation , `concern: true` is returned and the care card is shown before going to sorting again
 
 The affirmation is constrained to 25 words max, written in first person as if the user wrote it to themselves, with no clichés, no exclamation marks, and no emoji.
 
+## What the AI does not do
+- ✗ Does not store anything between sessions
+- ✗ Does not learn from previous entries
+- ✗ Does not build a psychological profile
+- ✗ Does not predict mood or suggest patterns
+- ✗ Does not recommend resources, therapists, or techniques
+- ✗ Does not respond conversationally
+- ✗ Does not have a persona or a name
+
+Every one of these was a deliberate choice. The moment the AI starts offering more than sorting and one affirmation, it starts positioning itself as a mental health tool, which it is not, and should not claim to be. The restraint is the design.
+---
 ## Getting started locally
 
 ### Requirements
