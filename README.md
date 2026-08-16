@@ -1,1 +1,1 @@
-# Hackathon
+# CS Girlies Annual Hackathon - Technology For Wellness
