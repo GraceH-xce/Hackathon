@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JourNote</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="wrap">
+        <div class="topbar">
+            <div class="brand"> JourNote𓂃🖊 </div>
+            <label for="start-date">Date:</label>
+            <input type="date" id="start-date" name="trip-start">
+            <nav class="nav">
+                <button id="navHome" class="on" onclick="go('home')">Journal</button>
+                <button id="navThoughts" onclick="go('thoughts')">My Thoughts</button>
+            </nav>
+        </div>
+
+        <!-- Screen 1: Home (Journaling Page) -->
+        <section id="home" class="view on">
+            <div id="returnedSlot"></div>
+
+            <h1 class="ask">How are you feeling today?</h1>
+            <p class="sub">Write down your thoughts and feelings. Let it be messy. JourNote will help sort it out.</p>
+            
+            <div class="pad">
+                <textarea id="entry" placeholder="Start writing..." oninput="countWords()"></textarea>
+            </div>
+            <div class="count"><span id="wc">0</span></div>
+
+            <div class="row">
+                <button class="btn btn-primary" id="doneBtn" onclick="sortIt()">I'm done</button>
+                <button class="btn btn-ghost" id="doneBtn" onclick="fillSample()">Use an example</button>
+            </div>
+        </section>
+
+        <!-- Screen 2: Relection -->
+        <section id="reflect" class="view">
+            <div id="reflectBody"></div>
+        </section>
+
+        <!-- Screen 3: My Thoughts -->
+        <section id="thoughts" class="view">
+            <h1 class="ask">My Thoughts</h1>
+            <p class="sub">Everything you've set down, sorted by categories.</p>
+            <div id="thoughtsBody"></div>
+        </section>
+
+        <details class="drawer">
+            <summary>Setup &amp; demo controls</summary>
+            <div class="inner">
+                <label class="hint" for="key">Gemini API key</label>
+                <input id="key" type="password" placeholder="AQ..." onchange="saveKey()">
+                <div class="row">
+                    <button class="btn btn-ghost btn-sm" onclick="skipDays(3)">Skip 3 days →</button>
+                    <button class="btn btn-ghost btn-sm" onclick="wipe()">Clear all data</button>
+            </div>
+            <p class="hint">"Skip 3 days" fast-forwards the clock so set-aside thoughts come back. Use for video demo.</p>
+        </div>
+    </details>
+            
+    </div>
+
+    <script src="index.js"></script>
+
+</body>
+</html>
