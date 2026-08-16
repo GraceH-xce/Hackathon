@@ -24,7 +24,31 @@ Journaling is widely recommended for mental wellness, and it genuinely help, but
 Hence, with those in mind, I had an idea to make JourNote. A web app that you shouldn't need a therapist of a perfect mindset to sort through your thoughts. With just a little structure, and something that meets you where you are, JourNote helps rewriting your journal entry into something cleaner, or telling you how to feel about it in a gentler way, without judging the mess.
 With the collaboration of AI, it doesn't give advice, nor does it diagnose. It just reads what you wrote and organises it using your own words, so you can see it more clearly than you could when it was all tangled inside.
 
-## How the AI works
+## What technology did I use?
+| Layer | Technology |
+|---|---|
+| Frontend | HTML, CSS, JavaScript |
+| AI | Google Gemini 3.5 Flash (free tier), Claude Sonnet|
+| Local server | My browser's local server |
+| Storage | Browser localStorage |
+
+No frameworks. No build step. No database. No accounts.
+
+## AI Model
+
+**Google Gemini 3.5 Flash**
+
+| Detail | Value |
+|---|---|
+| Provider | Google AI Studio |
+| Tier | Free |
+| Rate limit | 15 requests / minute, 1,500 requests / day |
+| API | Gemini REST API (`generativelanguage.googleapis.com`) |
+| Frameworks | None (raw REST API calls only) |
+
+---
+
+## How AI is used (A detailed report PDF is submitted on DevPost)
 
 The prompt explicitly instructs the model to:
 -Sort and not prescribe
@@ -33,6 +57,26 @@ The prompt explicitly instructs the model to:
 -Flags crisis language if entry contains signs of self-harm or suicidal ideation , `concern: true` is returned and the care card is shown before going to sorting again
 
 The affirmation is constrained to 25 words max, written in first person as if the user wrote it to themselves, with no clichés, no exclamation marks, and no emoji.
+
+## Getting started locally
+
+### Requirements
+
+- A Gemini API key (https://aistudio.google.com/app/apikey)
+
+### Setup
+
+1. Clone or download this repository
+2. Make sure all four files are in the same folder:
+   ```
+   journote/
+   ├── journote.html
+   ├── index.js
+   ├── styles.css
+   └── server.js
+   ```
+3. Run the code using live browser extension on Visual Studio Code
+4. Enter Gemini API key in Setup & Demo drawer on the first screen (should be at the bottom on the journal page)
 
 ## Privacy
 
@@ -51,5 +95,6 @@ If you or someone you know is struggling:
 
 MIT
 
-*Built solo within 48 hours for the CS Girlies Annual Hackathon - Technology For Wellness.**
+ ## Contributor
+*Built solo within 48 hours for the CS Girlies Annual Hackathon - Technology For Wellness.*
 
