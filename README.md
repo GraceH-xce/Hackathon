@@ -128,7 +128,6 @@ Every one of these was a deliberate choice. The moment the AI starts offering mo
    ├── journote.html
    ├── index.js
    ├── styles.css
-   └── server.js
    ```
 3. Run the code using live browser extension on Visual Studio Code
 4. Enter Gemini API key in Setup & Demo drawer on the first screen (should be at the bottom on the journal page)
