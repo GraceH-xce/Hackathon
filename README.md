@@ -29,7 +29,7 @@ With the collaboration of AI, it doesn't give advice, nor does it diagnose. It j
 |---|---|
 | Frontend | HTML, CSS, JavaScript |
 | AI | Google Gemini 3.5 Flash (free tier), Claude Sonnet|
-| Local server | Browser local server |
+| Hosting | Local only |
 | Storage | Browser localStorage |
 
 No frameworks. No build step. No database. No accounts.
